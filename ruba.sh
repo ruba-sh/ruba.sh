@@ -96,6 +96,7 @@ log() {
 }
 
 parse_args() {
+	# usage example: parse_args --name= --age=30 --title=$NIL --verbose -- "$@"
 	local parse_def=true
 	local arg_name
 	local arg_value
