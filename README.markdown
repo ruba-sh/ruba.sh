@@ -5,6 +5,7 @@ Ruba.sh is a lightweight Bash library that brings Ruby-like simplicity and clari
 ## Installation
 
 ### System-Wide Installation
+
 To make Ruba.sh available to all users on the system:
 
 1. Clone or download the repository.
@@ -22,6 +23,7 @@ To make Ruba.sh available to all users on the system:
    ```
 
 ### Per-User Installation
+
 To install Ruba.sh for a single user:
 
 1. Clone or download the repository.
@@ -48,6 +50,7 @@ To install Ruba.sh for a single user:
 Below are simple examples demonstrating each function in `ruba.sh`.
 
 ### `is_empty`
+
 ```bash
 if is_empty ""; then
   echo "Empty"
@@ -57,6 +60,7 @@ fi  # Prints: Empty
 ```
 
 ### `is_not_empty`
+
 ```bash
 if is_not_empty "hello"; then
   echo "Not empty"
@@ -66,6 +70,7 @@ fi  # Prints: Not empty
 ```
 
 ### `does_exist`
+
 ```bash
 touch test.txt
 if does_exist "test.txt"; then
@@ -76,6 +81,7 @@ fi  # Prints: Exists
 ```
 
 ### `does_not_exist`
+
 ```bash
 if does_not_exist "nonexistent.txt"; then
   echo "Does not exist"
@@ -85,6 +91,7 @@ fi  # Prints: Does not exist
 ```
 
 ### `is_dir`
+
 ```bash
 mkdir mydir
 if is_dir "mydir"; then
@@ -95,6 +102,7 @@ fi  # Prints: Is directory
 ```
 
 ### `is_file`
+
 ```bash
 touch test.txt
 if is_file "test.txt"; then
@@ -105,6 +113,7 @@ fi  # Prints: Is file
 ```
 
 ### `is_not_file`
+
 ```bash
 mkdir mydir
 if is_not_file "mydir"; then
@@ -115,6 +124,7 @@ fi  # Prints: Not a file
 ```
 
 ### `is_not_ok`
+
 ```bash
 false
 if is_not_ok; then
@@ -125,6 +135,7 @@ fi  # Prints: Last command failed
 ```
 
 ### `command_exists`
+
 ```bash
 if command_exists "ls"; then
   echo "Command exists"
@@ -134,6 +145,7 @@ fi  # Prints: Command exists
 ```
 
 ### `is_tar_path`
+
 ```bash
 if is_tar_path "archive.tar.gz"; then
   echo "Is tar path"
@@ -143,6 +155,7 @@ fi  # Prints: Is tar path
 ```
 
 ### `is_compressed`
+
 ```bash
 if is_compressed "file.zip"; then
   echo "Is compressed"
@@ -152,6 +165,7 @@ fi  # Prints: Is compressed
 ```
 
 ### `is_own`
+
 ```bash
 touch myfile.txt
 if is_own "myfile.txt"; then
@@ -162,6 +176,7 @@ fi  # Prints: I own this file
 ```
 
 ### `dbg`
+
 ```bash
 export DEBUG_XD="debug.log"
 dbg "Debug message"
@@ -169,11 +184,13 @@ cat debug.log  # Prints: Debug message
 ```
 
 ### `echo2`
+
 ```bash
 echo2 "Error message"  # Prints: Error message (to stderr)
 ```
 
 ### `error`
+
 ```bash
 export DEBUG_XD="debug.log"
 error "Something went wrong"  # Prints: Something went wrong (to stderr)
@@ -181,31 +198,38 @@ cat debug.log  # Prints: Something went wrong
 ```
 
 ### `fatal`
+
 ```bash
 fatal "Critical error"  # Prints: Critical error (to stderr) and exits
 ```
 
 ### `trim_1_extention`
+
 ```bash
 trim_1_extention "file.tar.gz"  # Prints: file.tar
 ```
 
 ### `trim_2_extentions`
+
 ```bash
 trim_2_extentions "file.tar.gz"  # Prints: file
 ```
 
 ### `extension`
+
 ```bash
 extension "file.tar.gz"  # Prints: gz
 ```
 
 ### `log`
+
 ```bash
 log "Starting process"  # Prints: 2025-05-17_01-11-23-123 Starting process (to stderr)
 ```
 
 ### `parse_args`
+
+
 ```bash
 my_function() {
   parse_args --name= --age=30 --title=$NIL --verbose -- "$@"
@@ -214,6 +238,22 @@ my_function() {
 my_function --name=Alice --verbose  # Prints: Name: Alice, Age: 30, Verbose: true
 my_function --name=Alice --title=lady  # Prints: Name: lady Alice, Age: 30, Verbose: 
 my_function --age=90 --verbose  # fails with message: Argument name is obligatory
+my_function --help  # Shows help message and exits
+my_function -h      # Shows help message and exits (short form)
+```
+
+The `parse_args` function automatically supports `--help` and `-h` options. When provided, it displays a help message showing all defined arguments with their types (required, optional with default value, optional may be empty, or flag) and exits with code 0. The `--help` argument is reserved and cannot be defined as a user argument.
+
+Example help output:
+```
+Usage: [command] [options]
+
+Options:
+  --age      VALUE    (optional, default: 30)
+  --name     VALUE    (required)
+  --title    VALUE    (optional, may be empty)
+  --verbose            (flag)
+  --help, -h           Show this help message
 ```
 
 ## Contributing
