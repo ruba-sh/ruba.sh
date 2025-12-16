@@ -142,6 +142,10 @@ parse_args() {
 			if [[ $1 == --help ]] || [[ $1 == -h ]]; then
 				# Show help message
 				local cmd_name="${FUNCNAME[1]:-$0}"
+				if [[ -z "$cmd_name" || "$cmd_name" == "main" ]]; then
+					    cmd_name="$0"
+				fi
+
 				echo "Usage: $cmd_name [options]"
 				# Check if short_description variable is defined and non-empty
 				if declare -p short_description &>/dev/null 2>&1 && [[ -n "${short_description:-}" ]]; then

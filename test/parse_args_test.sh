@@ -2,7 +2,6 @@
 
 # Test script for parse_args function with --help support
 
-# Source the ruba.sh library
 source ../ruba.sh/ruba.sh
 
 run_test() {
